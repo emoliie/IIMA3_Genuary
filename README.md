@@ -42,10 +42,22 @@
 
 ## Comment voir les sketches
 
-Ouvrir le fichier `index.html` de chaque jour dans un navigateur.
+### Galerie principale
+
+Ouvrir `index.html` à la racine du projet avec **Live Server** (VS Code) pour voir tous les sketches dans une galerie interactive :
+- Aperçu en miniature de chaque sketch
+- Cliquer pour ouvrir en grand avec navigation (précédent/suivant)
+- Navigation au clavier : `←` `→` pour naviguer, `Échap` pour fermer
+
+### Lancer le projet
+
+1. Ouvrir le dossier `genuary` dans VS Code
+2. Clic droit sur `index.html` → "Open with Live Server"
+3. Ou utiliser un serveur local : `python3 -m http.server 8000`
 
 ```
 genuary/
+├── index.html      ← Galerie principale
 ├── 01/index.html
 ├── 02/index.html
 ├── ...
@@ -54,7 +66,7 @@ genuary/
 
 ## Technologies
 
-- **p5.js** pour les jours 01-27 et 29-31
+- **p5.js** (via CDN) pour les jours 01-27 et 29-31
 - **CSS pur** pour le jour 28
 - **WebGL/GLSL** pour le jour 31
 

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genuary 2025 - Tous les sketches</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #e94560;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #a0a0a0;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .sketch-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+      }
+
+      .sketch-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        border-color: #e94560;
+      }
+
+      .sketch-preview {
+        width: 100%;
+        aspect-ratio: 1;
+        background: #0a0a0a;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sketch-preview iframe {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border: none;
+        pointer-events: none;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+      }
+
+      .sketch-preview .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .sketch-info {
+        padding: 15px 20px;
+      }
+
+      .day-number {
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: #e94560;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .day-title {
+        color: #fff;
+        font-size: 1rem;
+        margin-top: 5px;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox.active {
+        display: flex;
+      }
+
+      .lightbox-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox-iframe-container {
+        width: 80vmin;
+        height: 80vmin;
+        max-width: 600px;
+        max-height: 600px;
+        position: relative;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .lightbox-iframe-container iframe {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border: none;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+      }
+
+      .lightbox-title {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .lightbox-prompt {
+        color: #a0a0a0;
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      .lightbox-nav {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .lightbox-btn {
+        background: rgba(233, 69, 96, 0.2);
+        color: #fff;
+        border: 1px solid #e94560;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .lightbox-btn:hover {
+        background: #e94560;
+      }
+
+      .lightbox-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .lightbox-close:hover {
+        color: #e94560;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 60px;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      footer a {
+        color: #e94560;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      .keyboard-hint {
+        color: #666;
+        font-size: 0.85rem;
+        margin-top: 15px;
+      }
+
+      kbd {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin: 0 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Genuary 2026</h1>
+    <p class="subtitle">31 jours de dessins génératifs</p>
+
+    <div class="grid" id="grid"></div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="close">&times;</button>
+      <div class="lightbox-content">
+        <div class="lightbox-iframe-container" id="lightbox-container"></div>
+        <h2 class="lightbox-title" id="lightbox-title">Jour 01</h2>
+        <p class="lightbox-prompt" id="lightbox-prompt"></p>
+        <div class="lightbox-nav">
+          <button class="lightbox-btn" id="prev">&#8592; Précédent</button>
+          <button class="lightbox-btn" id="back">Retour à l'index</button>
+          <button class="lightbox-btn" id="next">Suivant &#8594;</button>
+        </div>
+        <p class="keyboard-hint">
+          Utilise <kbd>←</kbd> <kbd>→</kbd> pour naviguer, <kbd>Échap</kbd> pour
+          fermer
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Genuary 2026 -
+        <a href="https://genuary.art" target="_blank">genuary.art</a>
+      </p>
+    </footer>
+
+    <script>
+      const prompts = {
+        "01": "Une couleur, une forme",
+        "02": "Les douze principes de l'animation",
+        "03": "Suite de Fibonacci",
+        "04": "Basse résolution",
+        "05": "Écrire Genuary sans police",
+        "06": "Lumières allumées/éteintes",
+        "07": "Algèbre booléenne",
+        "08": "Métropole générative",
+        "09": "Automates cellulaires",
+        "10": "Coordonnées polaires",
+        "11": "Quine",
+        "12": "Uniquement des boîtes",
+        "13": "Autoportrait génératif",
+        "14": "Tout s'adapte parfaitement",
+        "15": "Objet invisible (ombres)",
+        "16": "Ordre et désordre",
+        "17": "Papier peint",
+        "18": "Chemin inattendu",
+        "19": "16x16",
+        "20": "Une seule ligne",
+        "21": "Bauhaus",
+        "22": "Traceur à plume",
+        "23": "Transparence",
+        "24": "Cauchemar du perfectionniste",
+        "25": "Géométrie organique",
+        "26": "Grilles récursives",
+        "27": "Forme en croissance",
+        "28": "HTML uniquement",
+        "29": "Évolution génétique",
+        "30": "Ce n'est pas un bug",
+        "31": "GLSL Shaders"
+      };
+
+      const grid = document.getElementById("grid");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxContainer = document.getElementById("lightbox-container");
+      const lightboxTitle = document.getElementById("lightbox-title");
+      const lightboxPrompt = document.getElementById("lightbox-prompt");
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+      const backBtn = document.getElementById("back");
+      const closeBtn = document.getElementById("close");
+
+      let currentDay = 1;
+      const totalDays = 31;
+
+      // Créer les 31 cartes
+      for (let i = 1; i <= totalDays; i++) {
+        const day = String(i).padStart(2, "0");
+
+        const card = document.createElement("div");
+        card.className = "sketch-card";
+        card.dataset.day = i;
+        card.innerHTML = `
+          <div class="sketch-preview" data-day="${day}">
+            <span class="loading">Chargement...</span>
+          </div>
+          <div class="sketch-info">
+            <span class="day-number">Jour ${day}</span>
+            <p class="day-title">${prompts[day]}</p>
+          </div>
+        `;
+        card.addEventListener("click", () => openLightbox(i));
+        grid.appendChild(card);
+      }
+
+      // Charger les iframes quand elles sont visibles
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const preview = entry.target;
+              const day = preview.dataset.day;
+
+              const iframe = document.createElement("iframe");
+              iframe.src = `${day}/index.html`;
+              iframe.onload = () => {
+                const loading = preview.querySelector(".loading");
+                if (loading) loading.remove();
+
+                // Calculer le scale pour remplir le container (object-cover)
+                const containerWidth = preview.offsetWidth;
+                const containerHeight = preview.offsetHeight;
+                const scale = Math.max(containerWidth, containerHeight) / 500;
+                iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+              };
+              preview.appendChild(iframe);
+
+              observer.unobserve(preview);
+            }
+          });
+        },
+        { rootMargin: "200px" },
+      );
+
+      document.querySelectorAll(".sketch-preview").forEach((preview) => {
+        observer.observe(preview);
+      });
+
+      // Lightbox functions
+      function openLightbox(day) {
+        currentDay = day;
+        updateLightbox();
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "";
+        lightboxContainer.innerHTML = "";
+      }
+
+      function updateLightbox() {
+        const day = String(currentDay).padStart(2, "0");
+        lightboxTitle.textContent = `Jour ${day}`;
+        lightboxPrompt.textContent = prompts[day];
+
+        // Calculer le scale pour remplir le container
+        const container = lightboxContainer;
+        const containerWidth = container.offsetWidth || 500;
+        const containerHeight = container.offsetHeight || 500;
+        const scale = Math.max(containerWidth, containerHeight) / 500;
+
+        lightboxContainer.innerHTML = `
+          <iframe src="${day}/index.html" style="transform: translate(-50%, -50%) scale(${scale});"></iframe>
+        `;
+
+        // Update buttons
+        prevBtn.disabled = currentDay <= 1;
+        nextBtn.disabled = currentDay >= totalDays;
+      }
+
+      function goToPrev() {
+        if (currentDay > 1) {
+          currentDay--;
+          updateLightbox();
+        }
+      }
+
+      function goToNext() {
+        if (currentDay < totalDays) {
+          currentDay++;
+          updateLightbox();
+        }
+      }
+
+      // Event listeners
+      closeBtn.addEventListener("click", closeLightbox);
+      backBtn.addEventListener("click", closeLightbox);
+      prevBtn.addEventListener("click", goToPrev);
+      nextBtn.addEventListener("click", goToNext);
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("active")) return;
+
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") goToPrev();
+        if (e.key === "ArrowRight") goToNext();
+      });
+
+      // Recalculate scale on resize
+      window.addEventListener("resize", () => {
+        if (lightbox.classList.contains("active")) {
+          updateLightbox();
+        }
+        // Recalculate grid iframes
+        document
+          .querySelectorAll(".sketch-preview iframe")
+          .forEach((iframe) => {
+            const preview = iframe.parentElement;
+            const containerWidth = preview.offsetWidth;
+            const containerHeight = preview.offsetHeight;
+            const scale = Math.max(containerWidth, containerHeight) / 500;
+            iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+          });
+      });
+    </script>
+  </body>
+</html>
