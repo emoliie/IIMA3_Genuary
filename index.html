@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Genuary 2025 - Tous les sketches</title>
+    <title>Genuary 2026 - All Sketches</title>
     <style>
       * {
         margin: 0;
@@ -35,8 +35,30 @@
       .subtitle {
         text-align: center;
         color: #a0a0a0;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         font-size: 1.1rem;
+      }
+
+      .chatbot-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .chatbot-link a {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #e94560, #c73e54);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .chatbot-link a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
       }
 
       .grid {
@@ -241,7 +263,11 @@
   </head>
   <body>
     <h1>Genuary 2026</h1>
-    <p class="subtitle">31 jours de dessins génératifs</p>
+    <p class="subtitle">31 days of generative drawings</p>
+
+    <div class="chatbot-link">
+      <a href="chatbot/index.html">🎨 Chat with GenBot, the gallery guardian</a>
+    </div>
 
     <div class="grid" id="grid"></div>
 
@@ -250,16 +276,15 @@
       <button class="lightbox-close" id="close">&times;</button>
       <div class="lightbox-content">
         <div class="lightbox-iframe-container" id="lightbox-container"></div>
-        <h2 class="lightbox-title" id="lightbox-title">Jour 01</h2>
+        <h2 class="lightbox-title" id="lightbox-title">Day 01</h2>
         <p class="lightbox-prompt" id="lightbox-prompt"></p>
         <div class="lightbox-nav">
-          <button class="lightbox-btn" id="prev">&#8592; Précédent</button>
-          <button class="lightbox-btn" id="back">Retour à l'index</button>
-          <button class="lightbox-btn" id="next">Suivant &#8594;</button>
+          <button class="lightbox-btn" id="prev">&#8592; Previous</button>
+          <button class="lightbox-btn" id="back">Back to index</button>
+          <button class="lightbox-btn" id="next">Next &#8594;</button>
         </div>
         <p class="keyboard-hint">
-          Utilise <kbd>←</kbd> <kbd>→</kbd> pour naviguer, <kbd>Échap</kbd> pour
-          fermer
+          Use <kbd>←</kbd> <kbd>→</kbd> to navigate, <kbd>Esc</kbd> to close
         </p>
       </div>
     </div>
@@ -273,36 +298,36 @@
 
     <script>
       const prompts = {
-        "01": "Une couleur, une forme",
-        "02": "Les douze principes de l'animation",
-        "03": "Suite de Fibonacci",
-        "04": "Basse résolution",
-        "05": "Écrire Genuary sans police",
-        "06": "Lumières allumées/éteintes",
-        "07": "Algèbre booléenne",
-        "08": "Métropole générative",
-        "09": "Automates cellulaires",
-        "10": "Coordonnées polaires",
+        "01": "One color, one shape",
+        "02": "The twelve principles of animation",
+        "03": "Fibonacci sequence",
+        "04": "Low resolution",
+        "05": "Write Genuary without a font",
+        "06": "Lights on/off",
+        "07": "Boolean algebra",
+        "08": "Generative metropolis",
+        "09": "Cellular automata",
+        "10": "Polar coordinates",
         "11": "Quine",
-        "12": "Uniquement des boîtes",
-        "13": "Autoportrait génératif",
-        "14": "Tout s'adapte parfaitement",
-        "15": "Objet invisible (ombres)",
-        "16": "Ordre et désordre",
-        "17": "Papier peint",
-        "18": "Chemin inattendu",
+        "12": "Only boxes",
+        "13": "Generative self-portrait",
+        "14": "Everything fits perfectly",
+        "15": "Invisible object (shadows)",
+        "16": "Order and disorder",
+        "17": "Wallpaper",
+        "18": "Unexpected path",
         "19": "16x16",
-        "20": "Une seule ligne",
+        "20": "One single line",
         "21": "Bauhaus",
-        "22": "Traceur à plume",
-        "23": "Transparence",
-        "24": "Cauchemar du perfectionniste",
-        "25": "Géométrie organique",
-        "26": "Grilles récursives",
-        "27": "Forme en croissance",
-        "28": "HTML uniquement",
-        "29": "Évolution génétique",
-        "30": "Ce n'est pas un bug",
+        "22": "Pen plotter",
+        "23": "Transparency",
+        "24": "Perfectionist's nightmare",
+        "25": "Organic geometry",
+        "26": "Recursive grids",
+        "27": "Growing shape",
+        "28": "HTML only",
+        "29": "Genetic evolution",
+        "30": "This is not a bug",
         "31": "GLSL Shaders"
       };
 
@@ -319,7 +344,7 @@
       let currentDay = 1;
       const totalDays = 31;
 
-      // Créer les 31 cartes
+      // Create the 31 cards
       for (let i = 1; i <= totalDays; i++) {
         const day = String(i).padStart(2, "0");
 
@@ -328,10 +353,10 @@
         card.dataset.day = i;
         card.innerHTML = `
           <div class="sketch-preview" data-day="${day}">
-            <span class="loading">Chargement...</span>
+            <span class="loading">Loading...</span>
           </div>
           <div class="sketch-info">
-            <span class="day-number">Jour ${day}</span>
+            <span class="day-number">Day ${day}</span>
             <p class="day-title">${prompts[day]}</p>
           </div>
         `;
@@ -339,7 +364,7 @@
         grid.appendChild(card);
       }
 
-      // Charger les iframes quand elles sont visibles
+      // Load iframes when visible
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -353,7 +378,7 @@
                 const loading = preview.querySelector(".loading");
                 if (loading) loading.remove();
 
-                // Calculer le scale pour remplir le container (object-cover)
+                // Calculate scale to fill container (object-cover)
                 const containerWidth = preview.offsetWidth;
                 const containerHeight = preview.offsetHeight;
                 const scale = Math.max(containerWidth, containerHeight) / 500;
@@ -388,10 +413,10 @@
 
       function updateLightbox() {
         const day = String(currentDay).padStart(2, "0");
-        lightboxTitle.textContent = `Jour ${day}`;
+        lightboxTitle.textContent = `Day ${day}`;
         lightboxPrompt.textContent = prompts[day];
 
-        // Calculer le scale pour remplir le container
+        // Calculate scale to fill container
         const container = lightboxContainer;
         const containerWidth = container.offsetWidth || 500;
         const containerHeight = container.offsetHeight || 500;
